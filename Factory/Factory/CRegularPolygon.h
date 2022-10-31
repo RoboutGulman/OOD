@@ -5,7 +5,7 @@
 class CRegularPolygon : public CShape
 {
 public:
-	CRegularPolygon(Point center, unsigned int radius, unsigned int vertexCount, Color color);
+	CRegularPolygon(Point&& center, unsigned int radius, unsigned int vertexCount, Color color);
 	Point GetCenter() const;
 	unsigned int GetRadius() const;
 	unsigned int GetVertexCount() const;

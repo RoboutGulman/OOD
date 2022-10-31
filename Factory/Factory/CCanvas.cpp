@@ -2,17 +2,22 @@
 
 #include "CCanvas.h"
 
+CCanvas::CCanvas(std::ostream& output)
+	: m_output(output)
+{
+}
+
 void CCanvas::SetColor(Color color)
 {
-	std::cout << "Set color" << std::endl;
+	m_output << "Set color" << std::endl;
 }
 
 void CCanvas::DrawLine(const Point& from, const Point& to)
 {
-	std::cout << "Draw line" << std::endl;
+	m_output << "Draw line from {" << from.x << ',' << from.y << "} to {" << to.x << ',' << to.y << '}' << std::endl;
 }
 
 void CCanvas::DrawEllipse(unsigned int l, unsigned int t, unsigned int width, unsigned int height)
 {
-	std::cout << "Draw ellipse" << std::endl;
+	m_output << "Draw ellipse with center in {" << l << ',' << t << "} width " << width << " height " << height << std::endl;
 }

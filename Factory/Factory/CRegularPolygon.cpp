@@ -1,8 +1,8 @@
 #include "stdafx.h"
 #include "CRegularPolygon.h"
 
-CRegularPolygon::CRegularPolygon(Point center, unsigned int radius, unsigned int vertexCount, Color color)
-	: CShape(center, color)
+CRegularPolygon::CRegularPolygon(Point&& center, unsigned int radius, unsigned int vertexCount, Color color)
+	: CShape(std::forward<Point>(center), color)
 	, m_radius(radius)
 	, m_vertex_count(vertexCount)
 {

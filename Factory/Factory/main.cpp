@@ -11,7 +11,7 @@ int main()
 		CShapeFactory factory;
 		CDesigner designer(std::make_unique<CShapeFactory>(factory));
 		auto draft = designer.CreateDraft(std::cin);
-		CCanvas canvas;
+		CCanvas canvas(std::cout);
 
 		CPainter painter;
 		//uniquePtr

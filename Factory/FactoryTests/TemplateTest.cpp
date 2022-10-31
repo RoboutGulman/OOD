@@ -2,8 +2,10 @@
 
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
+#include "../Factory/CCanvas.h"
 #include "../Factory/CDesigner.h"
 #include "../Factory/CEllipse.h"
+#include "../Factory/CPainter.h"
 #include "../Factory/CRectangle.h"
 #include "../Factory/CRegularPolygon.h"
 #include "../Factory/CShapeFactory.h"
@@ -19,7 +21,6 @@ SCENARIO("Shapes factory")
 		auto ellipsePtr = std::static_pointer_cast<CEllipse>(basePtr);
 		THEN("ellipse is created and takes correct values")
 		{
-			CHECK(ellipsePtr->GetBasePoint() == Point(1, 2));
 			CHECK(ellipsePtr->GetCenter() == Point(1, 2));
 			CHECK(ellipsePtr->GetColor() == Color::RED);
 			CHECK(ellipsePtr->GetVerticalRadius() == 4);
@@ -32,7 +33,6 @@ SCENARIO("Shapes factory")
 		auto rectanglePtr = std::static_pointer_cast<CRectangle>(basePtr);
 		THEN("rectangle is created and takes correct values")
 		{
-			CHECK(rectanglePtr->GetBasePoint() == Point(5, 6));
 			CHECK(rectanglePtr->GetColor() == Color::BLUE);
 			CHECK(rectanglePtr->GetLeftTop() == Point(5, 6));
 			CHECK(rectanglePtr->GetRightBottom() == Point(12, 14));
@@ -44,7 +44,6 @@ SCENARIO("Shapes factory")
 		auto poligonPtr = std::static_pointer_cast<CRegularPolygon>(basePtr);
 		THEN("regular polygon is created and takes correct values")
 		{
-			CHECK(poligonPtr->GetBasePoint() == Point(5, 6));
 			CHECK(poligonPtr->GetCenter() == Point(5, 6));
 			CHECK(poligonPtr->GetColor() == Color::GREEN);
 			CHECK(poligonPtr->GetRadius() == 7);
@@ -58,7 +57,6 @@ SCENARIO("Shapes factory")
 		auto trianglePtr = std::static_pointer_cast<CTriangle>(basePtr);
 		THEN("triangle is created and takes correct values")
 		{
-			CHECK(trianglePtr->GetBasePoint() == Point(11, 14));
 			CHECK(trianglePtr->GetVertex1() == Point(11, 14));
 			CHECK(trianglePtr->GetVertex2() == Point(3, 0));
 			CHECK(trianglePtr->GetVertex3() == Point(5, 45));
@@ -89,19 +87,58 @@ SCENARIO("Designer")
 	WHEN("designer creates a draft with shapes from input stream")
 	{
 		auto draft = designer.CreateDraft(strmIn);
-		THEN("draft contains shapes with correct values")
+		THEN("for each description the designer creates a shape")
 		{
 			CHECK(draft.GetShapeCount() == 3);
-			CHECK(draft.GetShape(0)->GetBasePoint() == Point(5, 6));
-			CHECK(draft.GetShape(0)->GetColor() == Color::YELLOW);
+		}
+		THEN("each shape takes correct values")
+		{
+			auto poligonPtr = std::static_pointer_cast<CRegularPolygon>(draft.GetShape(0));
+			CHECK(poligonPtr->GetCenter() == Point(5, 6));
+			CHECK(poligonPtr->GetColor() == Color::YELLOW);
+			CHECK(poligonPtr->GetRadius() == 7);
+			CHECK(poligonPtr->GetVertexCount() == 8);
 
-			CHECK(draft.GetShape(1)->GetBasePoint() == Point(3, 5));
-			CHECK(draft.GetShape(1)->GetColor() == Color::BLUE);
+			auto rectanglePtr = std::static_pointer_cast<CRectangle>(draft.GetShape(1));
+			CHECK(rectanglePtr->GetColor() == Color::BLUE);
+			CHECK(rectanglePtr->GetLeftTop() == Point(3, 5));
+			CHECK(rectanglePtr->GetRightBottom() == Point(5, 6));
 
-			CHECK(draft.GetShape(2)->GetBasePoint() == Point(1, 2));
 			CHECK(draft.GetShape(2)->GetColor() == Color::RED);
+		}
+	}
+	WHEN("any of the descriptions are incorrect")
+	{
+		std::string input = "regular-polygon yellow 5 6 7 8\nrectangle blue 3 5 2 1\nellipse red 1 2\n";
+		std::istringstream strmIn(input);
+		THEN("an error occurs")
+		{
+			REQUIRE_THROWS_AS(designer.CreateDraft(strmIn), std::invalid_argument);
 		}
 	}
 }
 
-//тесты canvas
+// тесты canvas
+SCENARIO("Canvas")
+{
+	CShapeFactory factory;
+	std::string input = "rectangle blue 3 5 2 1\nellipse red 1 2 4 5\n";
+	std::istringstream strmIn(input);
+	std::ostringstream strmOut;
+	CDesigner designer(std::make_unique<CShapeFactory>(factory));
+	auto draft = designer.CreateDraft(strmIn);
+	CCanvas canvas(strmOut);
+
+	CPainter painter;
+	WHEN("painter draws a picture on canvas")
+	{
+		painter.DrawPicture(draft, std::make_shared<CCanvas>(canvas));
+		THEN("he draws each shape using lines and ellipses")
+		{
+			CHECK(strmOut.str() == "Set color\nDraw line from {3,5} to {5,5}\n"
+								   "Draw line from {3,5} to {3,6}\nDraw line from {5,5} to {5,6}\n"
+								   "Draw line from {3,6} to {5,6}\n"
+								   "Set color\nDraw ellipse with center in {1,2} width 4 height 5\n");
+		}
+	}
+}

@@ -6,7 +6,7 @@
 class CEllipse : public CShape
 {
 public:
-	CEllipse(Point basePoint, unsigned int verticalR, unsigned int horizontalR, Color color);
+	CEllipse(Point&& basePoint, unsigned int verticalR, unsigned int horizontalR, Color color);
 
 	Point GetCenter() const;
 	unsigned int GetVerticalRadius() const;

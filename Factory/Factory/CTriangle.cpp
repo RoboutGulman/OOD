@@ -4,10 +4,10 @@
 #include "CTriangle.h"
 #include "ICanvas.h"
 
-CTriangle::CTriangle(Point v1, Point v2, Point v3, Color color)
-	: CShape(v1, color)
-	, m_vertex2(v2)
-	, m_vertex3(v3)
+CTriangle::CTriangle(Point&& v1, Point&& v2, Point&& v3, Color color)
+	: CShape(std::forward<Point>(v1), color)
+	, m_vertex2(std::forward<Point>(v2))
+	, m_vertex3(std::forward<Point>(v3))
 {
 }
 

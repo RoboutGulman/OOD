@@ -11,7 +11,7 @@
 
 constexpr auto NOT_ENOUGH_ARGUMENTS_ERROR = "The description should contain more arguments.";
 
-ShapePtr MakeEllipse(Point basePoint, Color color, std::stringstream& stream)
+ShapePtr MakeEllipse(Point&& basePoint, Color color, std::stringstream& stream)
 {
 	unsigned int verticalR, horizontalR;
 	if (!(stream >> verticalR >> horizontalR))
@@ -19,30 +19,30 @@ ShapePtr MakeEllipse(Point basePoint, Color color, std::stringstream& stream)
 		throw std::invalid_argument("Ellipse parameters not found");
 	}
 
-	return std::make_shared<CEllipse>(basePoint, verticalR, horizontalR, color);
+	return std::make_shared<CEllipse>(std::forward<Point>(basePoint), verticalR, horizontalR, color);
 }
 
-ShapePtr MakeRectangle(Point basePoint, Color color, std::stringstream& stream)
+ShapePtr MakeRectangle(Point&& basePoint, Color color, std::stringstream& stream)
 {
 	unsigned int width, height;
 	if (!(stream >> width >> height))
 	{
 		throw std::invalid_argument("Rectangle parameters not found");
 	}
-	return std::make_shared<CRectangle>(basePoint, width, height, color);
+	return std::make_shared<CRectangle>(std::forward<Point>(basePoint), width, height, color);
 }
 
-ShapePtr MakeRegularPoligon(Point basePoint, Color color, std::stringstream& stream)
+ShapePtr MakeRegularPoligon(Point&& basePoint, Color color, std::stringstream& stream)
 {
 	unsigned int radius, vertexCount;
 	if (!(stream >> radius >> vertexCount))
 	{
 		throw std::invalid_argument("Regular polygon parameters not found");
 	}
-	return std::make_shared<CRegularPolygon>(basePoint, radius, vertexCount, color);
+	return std::make_shared<CRegularPolygon>(std::forward<Point>(basePoint), radius, vertexCount, color);
 }
 
-ShapePtr MakeTriangle(Point vertex1, Color color, std::stringstream& stream)
+ShapePtr MakeTriangle(Point&& vertex1, Color color, std::stringstream& stream)
 {
 	Point vertex2, vertex3;
 
@@ -50,34 +50,28 @@ ShapePtr MakeTriangle(Point vertex1, Color color, std::stringstream& stream)
 	{
 		throw std::invalid_argument("Triangle parameters not found");
 	}
-	return std::make_shared<CTriangle>(vertex1, vertex2, vertex3, color);
+	return std::make_shared<CTriangle>(std::forward<Point>(vertex1), std::move(vertex2), std::move(vertex3), color);
 }
 
-ShapePtr MakeShape(ShapeType shapeType, Color color, std::stringstream& stream)
+ShapePtr MakeShape(ShapeType shapeType, Color color, std::stringstream& stream, Point&& basePoint)
 {
-	//перенести в createShape
-	Point basePoint;
-
-	if (!(stream >> basePoint))
-	{
-		throw std::invalid_argument("base point not found");
-	}
+	// перенести в createShape
 
 	if (shapeType == ShapeType::ELLIPSE)
 	{
-		return MakeEllipse(basePoint, color, stream);
+		return MakeEllipse(std::forward<Point>(basePoint), color, stream);
 	}
 	if (shapeType == ShapeType::RECTANGLE)
 	{
-		return MakeRectangle(basePoint, color, stream);
+		return MakeRectangle(std::forward<Point>(basePoint), color, stream);
 	}
 	if (shapeType == ShapeType::REGULAR_POLYGON)
 	{
-		return MakeRegularPoligon(basePoint, color, stream);
+		return MakeRegularPoligon(std::forward<Point>(basePoint), color, stream);
 	}
 	if (shapeType == ShapeType::TRIANGLE)
 	{
-		return MakeTriangle(basePoint, color, stream);
+		return MakeTriangle(std::forward<Point>(basePoint), color, stream);
 	}
 	return nullptr;
 }
@@ -107,7 +101,14 @@ ShapePtr CShapeFactory::CreateShape(const std::string& description) const
 		throw std::invalid_argument("Unknown color");
 	}
 
-	ShapePtr ptr = MakeShape(shapeType, color, stream);
+	Point basePoint;
+
+	if (!(stream >> basePoint))
+	{
+		throw std::invalid_argument("base point not found");
+	}
+
+	ShapePtr ptr = MakeShape(shapeType, color, stream, std::move(basePoint));
 
 	return ptr;
 }

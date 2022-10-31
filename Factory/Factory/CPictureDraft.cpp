@@ -14,7 +14,7 @@ size_t CPictureDraft::GetShapeCount() const
 }
 
 //убрать &
-const ShapePtr& CPictureDraft::GetShape(size_t index) const
+const ShapePtr CPictureDraft::GetShape(size_t index) const
 {
 	if (index >= m_shapes.size())
 	{

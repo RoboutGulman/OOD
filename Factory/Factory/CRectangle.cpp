@@ -4,8 +4,8 @@
 #include "CShape.h"
 #include "ICanvas.h"
 
-CRectangle::CRectangle(Point leftTop, unsigned int width, unsigned int height, Color color)
-	: CShape(leftTop, color)
+CRectangle::CRectangle(Point&& leftTop, unsigned int width, unsigned int height, Color color)
+	: CShape(std::forward<Point>(leftTop), color)
 	, m_rightBottom(leftTop.x + width, leftTop.y + height)
 {
 	if (width < 0 || height < 0)

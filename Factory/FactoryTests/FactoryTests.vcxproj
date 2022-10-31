@@ -155,8 +155,10 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Factory\CCanvas.cpp" />
     <ClCompile Include="..\Factory\CDesigner.cpp" />
     <ClCompile Include="..\Factory\CEllipse.cpp" />
+    <ClCompile Include="..\Factory\CPainter.cpp" />
     <ClCompile Include="..\Factory\CPictureDraft.cpp" />
     <ClCompile Include="..\Factory\CRectangle.cpp" />
     <ClCompile Include="..\Factory\CRegularPolygon.cpp" />
@@ -166,9 +168,11 @@
     <ClCompile Include="TemplateTest.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Factory\CCanvas.h" />
     <ClInclude Include="..\Factory\CDesigner.h" />
     <ClInclude Include="..\Factory\CEllipse.h" />
     <ClInclude Include="..\Factory\Color.h" />
+    <ClInclude Include="..\Factory\CPainter.h" />
     <ClInclude Include="..\Factory\CPictureDraft.h" />
     <ClInclude Include="..\Factory\CRectangle.h" />
     <ClInclude Include="..\Factory\CRegularPolygon.h" />
