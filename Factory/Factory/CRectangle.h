@@ -10,7 +10,7 @@ public:
 	Point GetLeftTop() const;
 	Point GetRightBottom() const;
 
-	void Draw(const std::shared_ptr<ICanvas>& canvas) const;
+	void Draw( CanvasPtr canvas) const;
 
 private:
 	Point m_rightBottom;

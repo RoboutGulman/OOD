@@ -132,7 +132,7 @@ SCENARIO("Canvas")
 	CPainter painter;
 	WHEN("painter draws a picture on canvas")
 	{
-		painter.DrawPicture(draft, std::make_shared<CCanvas>(canvas));
+		painter.DrawPicture(draft, std::make_unique<CCanvas>(canvas));
 		THEN("he draws each shape using lines and ellipses")
 		{
 			CHECK(strmOut.str() == "Set color\nDraw line from {3,5} to {5,5}\n"

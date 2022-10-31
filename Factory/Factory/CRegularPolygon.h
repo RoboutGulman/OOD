@@ -10,7 +10,7 @@ public:
 	unsigned int GetRadius() const;
 	unsigned int GetVertexCount() const;
 
-	void Draw(const std::shared_ptr<ICanvas>& canvas) const;
+	void Draw( CanvasPtr canvas) const;
 
 private:
 	unsigned int m_radius;

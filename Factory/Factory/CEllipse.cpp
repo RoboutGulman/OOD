@@ -31,7 +31,7 @@ unsigned int CEllipse::GetHorizontalRadius() const
 	return m_horizontalR;
 }
 
-void CEllipse::Draw(const std::shared_ptr<ICanvas>& canvas) const
+void CEllipse::Draw(CanvasPtr canvas) const
 {
 	auto center = GetCenter();
 	canvas->SetColor(GetColor());

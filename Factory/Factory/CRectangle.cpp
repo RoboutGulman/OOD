@@ -24,7 +24,7 @@ Point CRectangle::GetRightBottom() const
 	return m_rightBottom;
 }
 
-void CRectangle::Draw(const std::shared_ptr<ICanvas>& canvas) const
+void CRectangle::Draw( CanvasPtr canvas) const
 {
 	auto leftTop = GetLeftTop();
 	auto rightBottom = GetRightBottom();

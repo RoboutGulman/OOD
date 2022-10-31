@@ -1,4 +1,6 @@
 #pragma once
+#include "stdafx.h"
+
 #include "Color.h"
 #include "Point.h"
 
@@ -9,3 +11,5 @@ public:
 	virtual void DrawLine(const Point& from, const Point& to) = 0;
 	virtual void DrawEllipse(unsigned int l, unsigned int t, unsigned int width, unsigned int height) = 0;
 };
+
+using CanvasPtr = const std::unique_ptr<ICanvas>&;

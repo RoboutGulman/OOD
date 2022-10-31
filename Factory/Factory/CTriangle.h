@@ -11,7 +11,7 @@ public:
 	Point GetVertex2() const;
 	Point GetVertex3() const;
 
-	void Draw(const std::shared_ptr<ICanvas>& canvas) const;
+	void Draw( CanvasPtr canvas) const;
 
 private:
 	Point m_vertex2, m_vertex3;

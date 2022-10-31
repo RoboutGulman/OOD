@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "CPainter.h"
 
-void CPainter::DrawPicture(const CPictureDraft& draft, const std::shared_ptr<ICanvas>& canvas)
+void CPainter::DrawPicture(const CPictureDraft& draft, CanvasPtr canvas)
 {
 	for (int i = 0; i < draft.GetShapeCount(); i++)
 	{

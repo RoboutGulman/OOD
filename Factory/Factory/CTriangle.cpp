@@ -26,7 +26,7 @@ Point CTriangle::GetVertex3() const
 	return m_vertex3;
 }
 
-void CTriangle::Draw(const std::shared_ptr<ICanvas>& canvas) const
+void CTriangle::Draw(CanvasPtr canvas) const
 {
 	canvas->SetColor(GetColor());
 	canvas->DrawLine(GetVertex1(), GetVertex2());

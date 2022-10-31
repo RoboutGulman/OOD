@@ -1,7 +1,7 @@
 #pragma once
 struct Point
 {
-	Point(unsigned int x = 0, unsigned int y = 0)
+	Point(int x = 0, int y = 0)
 		: x(x)
 		, y(y)
 	{
@@ -12,13 +12,13 @@ struct Point
 		return x == other.x && y == other.y;
 	}
 
-	unsigned int x;
-	unsigned int y;
+	int x;
+	int y;
 };
 
 inline std::istream& operator>>(std::istream& stream, Point& point)
 {
-	unsigned int x, y;
+	int x, y;
 
 	if (stream >> x >> y)
 	{

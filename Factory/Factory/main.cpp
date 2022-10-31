@@ -15,12 +15,12 @@ int main()
 
 		CPainter painter;
 		//uniquePtr
-		painter.DrawPicture(draft, std::make_shared<CCanvas>(canvas));
+		painter.DrawPicture(draft, std::make_unique<CCanvas>(canvas));
 	}
 	catch (std::exception& exception)
 	{
 		std::cout << exception.what() << std::endl;
-		std::exit(1);
+		return 1;
 	}
 
 	return 0;
