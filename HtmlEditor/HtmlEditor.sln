@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HtmlEditor", "HtmlEditor\HtmlEditor.vcxproj", "{188087C9-345B-4B38-A4CC-88186D6C1138}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "HtmlEditorTests", "HtmlEditorTests\HtmlEditorTests.vcxproj", "{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{188087C9-345B-4B38-A4CC-88186D6C1138}.Release|x64.Build.0 = Release|x64
 		{188087C9-345B-4B38-A4CC-88186D6C1138}.Release|x86.ActiveCfg = Release|Win32
 		{188087C9-345B-4B38-A4CC-88186D6C1138}.Release|x86.Build.0 = Release|Win32
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Debug|x64.ActiveCfg = Debug|x64
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Debug|x64.Build.0 = Debug|x64
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Debug|x86.ActiveCfg = Debug|Win32
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Debug|x86.Build.0 = Debug|Win32
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Release|x64.ActiveCfg = Release|x64
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Release|x64.Build.0 = Release|x64
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Release|x86.ActiveCfg = Release|Win32
+		{03973D10-7FA9-4AE6-B1B4-2614F6A3642B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

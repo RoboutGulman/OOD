@@ -15,75 +15,54 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="TemplateTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stdafx.cpp">
+    <ClCompile Include="..\HtmlEditor\CEditorRemoteControl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractUndoableEdit.cpp">
+    <ClCompile Include="..\HtmlEditor\CDocumentItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CompoundEdit.cpp">
+    <ClCompile Include="..\HtmlEditor\IDocument.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UndoManager.cpp">
+    <ClCompile Include="..\HtmlEditor\UndoManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CDocumentItem.cpp">
+    <ClCompile Include="..\HtmlEditor\AbstractUndoableEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CEditorRemoteControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CEditor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="HtmlDocument.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="CParagraph.cpp">
+    <ClCompile Include="..\HtmlEditor\CompoundEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="stdafx.h">
+    <ClInclude Include="..\HtmlEditor\CEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractUndoableEdit.h">
+    <ClInclude Include="..\HtmlEditor\CEditorRemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IUndoableEdit.h">
+    <ClInclude Include="..\HtmlEditor\CDocumentItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CompoundEdit.h">
+    <ClInclude Include="..\HtmlEditor\IParagraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UndoManager.h">
+    <ClInclude Include="..\HtmlEditor\stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IDocument.h">
+    <ClInclude Include="..\HtmlEditor\IUndoableEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IParagraph.h">
+    <ClInclude Include="..\HtmlEditor\UndoManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CDocumentItem.h">
+    <ClInclude Include="..\HtmlEditor\CompoundEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CEditorRemoteControl.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="HtmlDocument.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CInsertDocumentItem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="CParagraph.h">
+    <ClInclude Include="..\HtmlEditor\AbstractUndoableEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

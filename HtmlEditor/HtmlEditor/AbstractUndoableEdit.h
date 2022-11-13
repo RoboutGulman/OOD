@@ -40,5 +40,5 @@ protected:
 
 private:
 	bool m_wasExecuted = false;
-	const std::string m_name{};
+	const std::string m_name;
 };

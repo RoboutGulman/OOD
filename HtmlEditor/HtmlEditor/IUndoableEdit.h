@@ -1,6 +1,5 @@
 #pragma once
-#include <memory>
-#include <string>
+#include "stdafx.h"
 
 class IUndoableEdit;
 
@@ -27,3 +26,4 @@ public:
 
 	virtual ~IUndoableEdit() = default;
 };
+

@@ -6,14 +6,14 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <tchar.h>
-
-#include <iostream>
-#include <string>
-#include <sstream>
+#include <algorithm>
+#include <filesystem>
 #include <functional>
+#include <iostream>
 #include <map>
-
+#include <memory>
+#include <optional>
+#include <sstream>
+#include <string>
 
 // TODO: reference additional headers your program requires here#pragma once
