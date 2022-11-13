@@ -60,8 +60,3 @@ bool AbstractUndoableEdit::ReplaceEdit(const IUndoableEditSharedPtr& edit)
 {
 	return false;
 }
-
-const std::string& AbstractUndoableEdit::GetName() const
-{
-	return m_name;
-}

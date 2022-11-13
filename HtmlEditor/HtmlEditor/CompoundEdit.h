@@ -14,7 +14,7 @@ public:
 	{
 	}
 
-	bool AddEdit(const IUndoableEditSharedPtr& edit) final;
+	bool AddEdit(const IUndoableEditSharedPtr& edit);
 	bool EndCompose() noexcept;
 
 protected:

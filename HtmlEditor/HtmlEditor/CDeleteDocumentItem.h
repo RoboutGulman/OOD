@@ -17,7 +17,7 @@ public:
 	}
 
 private:
-	bool DerivedExecute() final
+	bool DerivedExecute()
 	{
 		if (m_index > m_target.size())
 		{
@@ -32,7 +32,7 @@ private:
 		return true;
 	}
 
-	bool DerivedUndo() final
+	bool DerivedUndo()
 	{
 		auto it = m_target.begin();
 		std::advance(it, m_index);
@@ -42,7 +42,7 @@ private:
 		return true;
 	}
 
-	bool DerivedRedo() final
+	bool DerivedRedo()
 	{
 		return DerivedExecute();
 	}

@@ -19,9 +19,5 @@ public:
 
 	virtual bool AddEdit(const IUndoableEditSharedPtr& edit) = 0;
 	virtual bool ReplaceEdit(const IUndoableEditSharedPtr& edit) = 0;
-
-	virtual const std::string& GetName() const = 0;
-
-	virtual ~IUndoableEdit() = default;
 };
 

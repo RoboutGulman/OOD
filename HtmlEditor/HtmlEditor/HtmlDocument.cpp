@@ -114,10 +114,91 @@ void HTMLDocument::Print(std::ostream& output) const
 	}
 }
 
+const std::map<char, std::string_view> SPEC_SYMBS_TO_HTML_SYMBS{
+	{ '<', "&lt;" },
+	{ '>', "&gt;" },
+	{ '"', "&Prime;" },
+	{ '\'', "&prime;" },
+	{ '&', "&amp;" }
+};
+
+std::string GetEncodedHtmlString(const std::string& src)
+{
+	std::string res;
+	res.reserve(src.size());
+
+	for (const auto& ch : src)
+	{
+		if (auto it = SPEC_SYMBS_TO_HTML_SYMBS.find(ch);
+			it != SPEC_SYMBS_TO_HTML_SYMBS.end())
+		{
+			res += it->second;
+		}
+		else
+		{
+			res += ch;
+		}
+	}
+
+	return res;
+}
+
+void SaveHead(std::ostream& output, size_t indentIndex, const std::string& title)
+{
+	output << std::string(2 * ++indentIndex, ' ') + "<head>\n"
+		   << std::string(2 * ++indentIndex, ' ') + "<title>" + title + "</title>\n"
+		   << std::string(2 * --indentIndex, ' ') + "</head>\n";
+}
+
+void SaveParagraph(const ParagraphPtr& paragraphPtr, std::ostream& output)
+{
+	if (paragraphPtr != nullptr)
+	{
+		output << "<p>" + GetEncodedHtmlString(paragraphPtr->GetText()) + "</p>";
+	}
+}
+
+void FormHtmlDocument(const std::string& title, const DocumentItemsContainer& items, std::ostream& output)
+{
+	output << "<!DOCTYPE html>\n";
+
+	output << "<html lang=\"en\">\n";
+
+	size_t indentIndex = 0;
+
+	SaveHead(output, indentIndex, title);
+
+	output << std::string(2 * ++indentIndex, ' ') + "<body>\n";
+
+	++indentIndex;
+	for (auto item : items)
+	{
+		auto paragraphPtr = item.GetParagraph();
+
+		output << std::string(2 * indentIndex, ' ');
+
+		SaveParagraph(paragraphPtr, output);
+
+		output << std::endl;
+	}
+	--indentIndex;
+
+	output << std::string(2 * indentIndex, ' ') + "</body>\n"
+		   << "</html>" << std::endl;
+}
+
 void HTMLDocument::Save(const Path& path) const
 {
-	for (auto item : m_items)
+	if (!std::filesystem::is_directory(path))
 	{
-		std::cout << item.GetParagraph()->GetText() << std::endl;
+		std::filesystem::create_directory(path);
 	}
+
+	Path correctPath = path;
+	correctPath /= m_title;
+	correctPath = correctPath.replace_extension(".html");
+
+	std::ofstream output(correctPath.generic_string());
+
+	FormHtmlDocument(m_title, m_items, output);
 }

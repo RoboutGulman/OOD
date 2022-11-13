@@ -6,7 +6,7 @@
 class AbstractUndoableEdit : public IUndoableEdit
 {
 public:
-	void Execute() final;
+	void Execute();
 
 	bool CanUndo() const override;
 	bool CanRedo() const override;
@@ -17,15 +17,9 @@ public:
 	bool AddEdit(const IUndoableEditSharedPtr& edit) override;
 	bool ReplaceEdit(const IUndoableEditSharedPtr& edit) override;
 
-	const std::string& GetName() const final;
 protected:
 	AbstractUndoableEdit() = default;
 
-	AbstractUndoableEdit(std::string&& editName)
-		: m_name(std::forward<std::string>(editName))
-		, m_wasExecuted(false)
-	{
-	}
 	~AbstractUndoableEdit();
 
 	virtual bool DerivedExecute() = 0;
@@ -37,5 +31,4 @@ protected:
 
 private:
 	bool m_wasExecuted = false;
-	const std::string m_name;
 };

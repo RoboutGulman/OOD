@@ -16,9 +16,9 @@ public:
 		std::optional<size_t> position = std::nullopt);
 
 	/*IImageSharedPtr InsertImage(const Path& path, size_t width, size_t height,
-		std::optional<size_t> position = std::nullopt) final;
+		std::optional<size_t> position = std::nullopt);
 	IImageSharedPtr ResizeImage(size_t width, size_t height,
-		std::optional<size_t> position = std::nullopt) final;*/
+		std::optional<size_t> position = std::nullopt);*/
 
 	size_t GetItemsCount() const;
 	CDocumentItem GetItem(size_t index) const;

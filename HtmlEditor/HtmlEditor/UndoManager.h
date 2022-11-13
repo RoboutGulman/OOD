@@ -9,15 +9,15 @@ public:
 
 	UndoManager() = default;
 
-	bool CanUndo() const final;
-	bool CanRedo() const final;
+	bool CanUndo() const;
+	bool CanRedo() const;
 
 	void AddAndExecuteEdit(const IUndoableEditSharedPtr& edit);
 
 private:
-	bool DerivedExecute() final;
-	bool DerivedUndo() final;
-	bool DerivedRedo() final;
+	bool DerivedExecute();
+	bool DerivedUndo();
+	bool DerivedRedo();
 
 	size_t m_nextEditIndex{};
 };
