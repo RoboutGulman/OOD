@@ -160,12 +160,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractUndoableEdit.h" />
+    <ClInclude Include="CDeleteDocumentItem.h" />
     <ClInclude Include="CDocumentItem.h" />
     <ClInclude Include="CEditorRemoteControl.h" />
     <ClInclude Include="CInsertDocumentItem.h" />
     <ClInclude Include="CompoundEdit.h" />
     <ClInclude Include="CEditor.h" />
     <ClInclude Include="CParagraph.h" />
+    <ClInclude Include="CReplaceDocumentItem.h" />
+    <ClInclude Include="CSetTitle.h" />
     <ClInclude Include="HtmlDocument.h" />
     <ClInclude Include="IDocument.h" />
     <ClInclude Include="IParagraph.h" />

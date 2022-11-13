@@ -17,11 +17,6 @@ void AbstractUndoableEdit::Execute()
 	m_wasExecuted = DerivedExecute();
 }
 
-void AbstractUndoableEdit::operator()()
-{
-	Execute();
-}
-
 void AbstractUndoableEdit::Undo()
 {
 	if (!CanUndo())

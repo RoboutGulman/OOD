@@ -7,19 +7,19 @@ CEditorRemoteControl::CEditorRemoteControl(std::istream& input, std::ostream& ou
 {
 }
 
-void CEditorRemoteControl::AddItem(const std::string& command, const std::string& description, const CommandFunction& commandFunction)
+void CEditorRemoteControl::AddItem(const std::string& shortcut, const std::string& description, const Command& command)
 {
-	m_items.emplace_back(command, description, commandFunction);
+	m_items.emplace_back(shortcut, description, command);
 }
 
 void CEditorRemoteControl::Run()
 {
 	ShowInstructions();
 
-	std::string command;
+	std::string shortcut;
 	while ((m_output << ">")
-		&& std::getline(m_input, command)
-		&& ExecuteCommand(command))
+		&& std::getline(m_input, shortcut)
+		&& ExecuteCommand(shortcut))
 	{
 	}
 }
@@ -29,7 +29,7 @@ void CEditorRemoteControl::ShowInstructions()
 	m_output << "Commands list:\n";
 	for (auto& item : m_items)
 	{
-		m_output << item.command << ": " << item.description << std::endl;
+		m_output << item.shortcut << ": " << item.description << std::endl;
 	}
 	m_output << std::endl;
 }
@@ -39,20 +39,20 @@ void CEditorRemoteControl::Exit()
 	m_exit = true;
 }
 
-bool CEditorRemoteControl::ExecuteCommand(const std::string& command)
+bool CEditorRemoteControl::ExecuteCommand(const std::string& shortcut)
 {
-	std::istringstream iss(command);
+	std::istringstream iss(shortcut);
 	std::string name;
 	iss >> name;
 
 	m_exit = false;
 	auto it = std::find_if(m_items.begin(), m_items.end(), [&name](const Item& item) {
-		return item.command == name;
+		return item.shortcut == name;
 	});
 
 	if (it != m_items.end())
 	{
-		it->commandFunction(iss);
+		it->command(iss);
 	}
 	else
 	{

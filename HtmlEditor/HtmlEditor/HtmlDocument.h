@@ -1,17 +1,15 @@
 #pragma once
+#include "stdafx.h"
+
 #include "CDocumentItem.h"
 #include "IDocument.h"
 #include "UndoManager.h"
 
+using DocumentItemsContainer = std::deque<CDocumentItem>;
+
 class HTMLDocument : public IDocument
 {
 public:
-	 using Container = std::deque<CDocumentItem>;
-
-	HTMLDocument() = default;
-
-	HTMLDocument(std::string&& title);
-
 	ParagraphPtr InsertParagraph(const std::string& text,
 		std::optional<size_t> position = std::nullopt);
 	ParagraphPtr ReplaceParagraph(const std::string& newText,
@@ -23,11 +21,11 @@ public:
 		std::optional<size_t> position = std::nullopt) final;*/
 
 	size_t GetItemsCount() const;
-	const CDocumentItem& GetItem(size_t index) const;
+	CDocumentItem GetItem(size_t index) const;
 
 	void DeleteItem(size_t index);
 
-	const std::string& GetTitle() const;
+	std::string GetTitle() const;
 	void SetTitle(const std::string& title);
 
 	bool CanUndo() const;
@@ -35,13 +33,12 @@ public:
 	bool CanRedo() const;
 	void Redo();
 
-	 void Save(const Path& path) const;
+	void Save(const Path& path) const;
 
+	void Print(std::ostream& output) const;
 private:
-	// size_t CountImages() const;
-
 	std::string m_title = "Title";
 
-	Container m_items;
+	DocumentItemsContainer m_items;
 	UndoManager m_undoManager;
 };

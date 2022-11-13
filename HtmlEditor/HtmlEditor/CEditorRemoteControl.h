@@ -2,30 +2,30 @@
 class CEditorRemoteControl
 {
 public:
-	using CommandFunction = std::function<void(std::istream&)>;
+	using Command = std::function<void(std::istream&)>;
 
 	CEditorRemoteControl(std::istream& input, std::ostream& output);
 
-	void AddItem(const std::string& command, const std::string& description, const CommandFunction& commandFunction);
+	void AddItem(const std::string& shortcut, const std::string& description, const Command& command);
 	void Run();
 	void ShowInstructions();
 	void Exit();
 
 private:
-	bool ExecuteCommand(const std::string& command);
+	bool ExecuteCommand(const std::string& shortcut);
 
 	struct Item
 	{
-		Item(const std::string& command, const std::string& description, const CommandFunction& commandFunction)
-			: command(command)
+		Item(const std::string& shortcut, const std::string& description, const Command& command)
+			: shortcut(shortcut)
 			, description(description)
-			, commandFunction(commandFunction)
+			, command(command)
 		{
 		}
 
-		std::string command{};
-		std::string description{};
-		CommandFunction commandFunction{};
+		std::string shortcut;
+		std::string description;
+		Command command;
 	};
 
 	std::istream& m_input;

@@ -22,8 +22,6 @@ public:
 
 	virtual const std::string& GetName() const = 0;
 
-	virtual void operator()() = 0;
-
 	virtual ~IUndoableEdit() = default;
 };
 

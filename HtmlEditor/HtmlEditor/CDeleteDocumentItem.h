@@ -2,38 +2,28 @@
 #include "stdafx.h"
 
 #include "CDocumentItem.h"
-#include "AbstractUndoableEdit.h"
+#include "CompoundEdit.h"
 #include "HtmlDocument.h"
 
-class CInsertDocumentItem : public AbstractUndoableEdit
+class CDeleteDocumentItem : public AbstractUndoableEdit
 {
 public:
-	CInsertDocumentItem(DocumentItemsContainer& target, const CDocumentItem& docItem, size_t index)
+	CDeleteDocumentItem(DocumentItemsContainer& target, const CDocumentItem& item, size_t index)
 		: AbstractUndoableEdit()
 		, m_target(target)
 		, m_index(index)
-		, m_state(docItem)
+		, m_state(item)
 	{
 	}
 
 private:
-	bool DerivedExecute()
+	bool DerivedExecute() final
 	{
 		if (m_index > m_target.size())
 		{
-			throw std::out_of_range("Failed to insert an item into Document. Given index is out of range");
+			throw std::out_of_range("Failed to delete an item from Document. Given index is out of range");
 		}
 
-		auto it = m_target.begin();
-		std::advance(it, m_index);
-
-		m_target.emplace(it, m_state);
-
-		return true;
-	}
-
-	bool DerivedUndo()
-	{
 		auto it = m_target.begin();
 		std::advance(it, m_index);
 
@@ -42,7 +32,17 @@ private:
 		return true;
 	}
 
-	bool DerivedRedo()
+	bool DerivedUndo() final
+	{
+		auto it = m_target.begin();
+		std::advance(it, m_index);
+
+		m_target.emplace(it, m_state);
+
+		return true;
+	}
+
+	bool DerivedRedo() final
 	{
 		return DerivedExecute();
 	}

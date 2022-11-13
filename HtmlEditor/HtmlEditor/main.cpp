@@ -5,8 +5,8 @@
 
 int main()
 {
-	auto doc = std::make_unique<HTMLDocument>();
-	CEditor editor{ std::move(doc), std::cin, std::cout };
+	auto document = std::make_unique<HTMLDocument>();
+	CEditor editor(std::move(document), std::cin, std::cout);
 	editor.Start();
 
 	return 0;

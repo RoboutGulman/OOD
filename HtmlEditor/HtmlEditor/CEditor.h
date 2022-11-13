@@ -14,14 +14,14 @@ private:
 	void Redo();
 	void Undo();
 
-	//void DeleteItem(std::istream& is);
+	void DeleteItem(std::istream& is);
 	void InsertParagparh(std::istream& is);
 	//void InsertImage(std::istream& is);
-	//void ListDocument();
-	//void RsizeImage(std::istream& is);
-	//void ReplaceText(std::istream& is);
+	void PrintDocument();
+	//void ResizeImage(std::istream& is);
+	void ReplaceText(std::istream& is);
 	void Save(std::istream& is);
-	//void SetTitle(std::istream& is);
+	void SetTitle(std::istream& is);
 
 	DocumentPtr m_document;
 	CEditorRemoteControl m_remoteControl;

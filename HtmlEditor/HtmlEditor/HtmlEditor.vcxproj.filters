@@ -86,5 +86,14 @@
     <ClInclude Include="CParagraph.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CReplaceDocumentItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CDeleteDocumentItem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CSetTitle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

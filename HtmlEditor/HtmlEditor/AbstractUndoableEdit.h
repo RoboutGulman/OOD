@@ -18,9 +18,6 @@ public:
 	bool ReplaceEdit(const IUndoableEditSharedPtr& edit) override;
 
 	const std::string& GetName() const final;
-
-	void operator()() final;
-
 protected:
 	AbstractUndoableEdit() = default;
 

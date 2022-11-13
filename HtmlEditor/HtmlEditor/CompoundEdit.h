@@ -24,7 +24,7 @@ protected:
 	bool DerivedUndo() override;
 	bool DerivedRedo() override;
 
-	std::deque<IUndoableEditSharedPtr> m_edits{};
+	std::deque<IUndoableEditSharedPtr> m_edits;
 
 private:
 	bool m_inCompose = true;
