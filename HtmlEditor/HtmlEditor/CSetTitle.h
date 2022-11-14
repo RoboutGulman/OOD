@@ -9,9 +9,9 @@ class CSetTitle : public AbstractUndoableEdit
 {
 public:
 	template <typename StringT = std::string>
-	CSetTitle(std::string& target, StringT&& name)
+	CSetTitle(std::string& receiver, StringT&& name)
 		: AbstractUndoableEdit()
-		, m_target(target)
+		, m_receiver(receiver)
 		, m_state(std::forward<StringT>(name))
 	{
 	}
@@ -19,7 +19,7 @@ public:
 private:
 	bool DerivedExecute()
 	{
-		m_target.swap(m_state);
+		m_receiver.swap(m_state);
 
 		return true;
 	}
@@ -34,6 +34,6 @@ private:
 		return DerivedExecute();
 	}
 
-	std::string& m_target;
+	std::string& m_receiver;
 	std::string m_state;
 };

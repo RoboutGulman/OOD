@@ -1,4 +1,5 @@
 #pragma once
+//переименовать в Menu
 class CEditorRemoteControl
 {
 public:

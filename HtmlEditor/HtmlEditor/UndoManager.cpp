@@ -14,6 +14,7 @@ bool UndoManager::CanRedo() const
 
 void UndoManager::AddAndExecuteEdit(const IUndoableEditSharedPtr& edit)
 {
+	//переделать
 	if (m_nextEditIndex < m_edits.size())
 	{
 		edit->Execute();

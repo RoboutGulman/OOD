@@ -76,6 +76,7 @@ SCENARIO("Remote Control")
 SCENARIO("Html Document")
 {
 	HTMLDocument doc;
+	const auto defaultTitle = "Title";
 
 	WHEN("create document")
 	{
@@ -85,7 +86,7 @@ SCENARIO("Html Document")
 			CHECK(doc.CanRedo() == false);
 			REQUIRE_THROWS_AS(doc.GetItem(0), std::out_of_range);
 			CHECK(doc.GetItemsCount() == 0);
-			CHECK(doc.GetTitle() == "Title");
+			CHECK(doc.GetTitle() == defaultTitle);
 		}
 	}
 	WHEN("set document title")
@@ -102,7 +103,7 @@ SCENARIO("Html Document")
 			doc.Undo();
 			THEN("title returns to default")
 			{
-				CHECK(doc.GetTitle() == "Title");
+				CHECK(doc.GetTitle() == defaultTitle);
 				CHECK(doc.CanUndo() == false);
 				CHECK(doc.CanRedo() == true);
 			}
@@ -115,6 +116,118 @@ SCENARIO("Html Document")
 					CHECK(doc.CanUndo() == true);
 					CHECK(doc.CanRedo() == false);
 				}
+			}
+		}
+	}
+	WHEN("insert paragraph")
+	{
+		const auto paragraphText = "Paragraph text";
+		auto paragraph = doc.InsertParagraph(paragraphText);
+		THEN("document contain paragraph with inserted text")
+		{
+			CHECK(paragraph->GetText() == paragraphText);
+			CHECK(doc.CanRedo() == false);
+			CHECK(doc.CanUndo() == true);
+			CHECK(doc.GetItem(0).GetParagraph() == paragraph);
+			CHECK(doc.GetItemsCount() == 1);
+		}
+	}
+	WHEN("have document with 1 paragraph")
+	{
+		const auto paragraph1Text = "Paragraph 1 text";
+		auto paragraph1 = doc.InsertParagraph(paragraph1Text);
+
+		WHEN("insert paragraph on default position")
+		{
+			const auto paragraph2Text = "Paragraph 2 text";
+			auto paragraph2 = doc.InsertParagraph(paragraph2Text);
+			THEN("new paragraph insert in end of document")
+			{
+				CHECK(doc.GetItemsCount() == 2);
+				CHECK(doc.GetItem(0).GetParagraph() == paragraph1);
+				CHECK(doc.GetItem(1).GetParagraph() == paragraph2);
+			}
+		}
+	}
+	WHEN("have document with 2 paragraphs")
+	{
+		const auto paragraph1Text = "Paragraph 1 text";
+		auto paragraph1 = doc.InsertParagraph(paragraph1Text);
+
+		const auto paragraph2Text = "Paragraph 2 text";
+		auto paragraph2 = doc.InsertParagraph(paragraph2Text);
+
+		WHEN("insert paragraph in the first position")
+		{
+			const auto paragraph3Text = "Paragraph 3 text";
+			auto paragraph3 = doc.InsertParagraph(paragraph3Text, 1);
+			THEN("the first paragraph remains in its place, the second is shifted")
+			{
+				CHECK(doc.GetItemsCount() == 3);
+				CHECK(doc.GetItem(0).GetParagraph() == paragraph1);
+				CHECK(doc.GetItem(1).GetParagraph() == paragraph3);
+				CHECK(doc.GetItem(2).GetParagraph() == paragraph2);
+			}
+		}
+	}
+	WHEN("insert paragraph on incorrect position")
+	{
+		REQUIRE_THROWS_AS(doc.InsertParagraph("text", 2), std::out_of_range);
+	}
+	WHEN("replace paragraph text")
+	{
+		const auto paragraphText = "Paragraph text";
+		const auto newParagraphText = "new text of Paragraph";
+		doc.InsertParagraph(paragraphText);
+
+		auto paragraph = doc.ReplaceParagraph(newParagraphText);
+		THEN("text in paragraph changes")
+		{
+			CHECK(paragraph->GetText() == newParagraphText);
+			CHECK(doc.GetItemsCount() == 1);
+			CHECK(doc.GetItem(0).GetParagraph() == paragraph);
+		}
+	}
+	WHEN("replace paragraph in empty document")
+	{
+		REQUIRE_THROWS_AS(doc.ReplaceParagraph("text"), std::out_of_range);
+	}
+	WHEN("replace paragraph on incorrect position")
+	{
+		REQUIRE_THROWS_AS(doc.ReplaceParagraph("text", 2), std::out_of_range);
+	}
+	WHEN("save document")
+	{
+		doc.InsertParagraph("Some text");
+		IDocument::Path directoryPath = "directory";
+
+		doc.Save(directoryPath);
+		THEN("folder is created")
+		{
+			CHECK(std::filesystem::exists(directoryPath));
+			std::filesystem::remove_all(directoryPath);
+		}
+	}
+	WHEN("have document with 3 paragraphs")
+	{
+		const auto paragraph1Text = "Paragraph 1 text";
+		auto paragraph1 = doc.InsertParagraph(paragraph1Text);
+
+		const auto paragraph2Text = "Paragraph 2 text";
+		auto paragraph2 = doc.InsertParagraph(paragraph2Text);
+
+		const auto paragraph3Text = "Paragraph 3 text";
+		auto paragraph3 = doc.InsertParagraph(paragraph3Text);
+
+		WHEN("delete paragraph in the first position")
+		{
+			doc.DeleteItem(1);
+			THEN("the first paragraph remains in its place, the second is shifted")
+			{
+				CHECK(doc.GetItemsCount() == 3);
+				CHECK(doc.GetItem(0).GetParagraph() == paragraph1);
+				CHECK(doc.GetItem(1).GetParagraph() == paragraph3);
+				CHECK(doc.GetItem(2).GetParagraph() == paragraph2);
 			}
 		}
 	}

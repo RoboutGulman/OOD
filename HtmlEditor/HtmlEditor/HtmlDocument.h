@@ -5,7 +5,7 @@
 #include "IDocument.h"
 #include "UndoManager.h"
 
-using DocumentItemsContainer = std::deque<CDocumentItem>;
+using DocumentItemsContainer = std::vector<CDocumentItem>;
 
 class HTMLDocument : public IDocument
 {

@@ -8,9 +8,9 @@
 class CInsertDocumentItem : public AbstractUndoableEdit
 {
 public:
-	CInsertDocumentItem(DocumentItemsContainer& target, const CDocumentItem& docItem, size_t index)
+	CInsertDocumentItem(DocumentItemsContainer& receiver, const CDocumentItem& docItem, size_t index)
 		: AbstractUndoableEdit()
-		, m_target(target)
+		, m_receiver(receiver)
 		, m_index(index)
 		, m_state(docItem)
 	{
@@ -19,25 +19,25 @@ public:
 private:
 	bool DerivedExecute()
 	{
-		if (m_index > m_target.size())
+		if (m_index > m_receiver.size())
 		{
 			throw std::out_of_range("Failed to insert an item into Document. Given index is out of range");
 		}
 
-		auto it = m_target.begin();
+		auto it = m_receiver.begin();
 		std::advance(it, m_index);
 
-		m_target.emplace(it, m_state);
+		m_receiver.emplace(it, m_state);
 
 		return true;
 	}
 
 	bool DerivedUndo()
 	{
-		auto it = m_target.begin();
+		auto it = m_receiver.begin();
 		std::advance(it, m_index);
 
-		m_target.erase(it);
+		m_receiver.erase(it);
 
 		return true;
 	}
@@ -47,7 +47,7 @@ private:
 		return DerivedExecute();
 	}
 
-	DocumentItemsContainer& m_target;
+	DocumentItemsContainer& m_receiver;
 
 	size_t m_index;
 	CDocumentItem m_state;

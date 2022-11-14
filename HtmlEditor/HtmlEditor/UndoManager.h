@@ -1,13 +1,12 @@
 #pragma once
 #include "CompoundEdit.h"
 
+//HistoryManager|History
 class UndoManager : private CompoundEdit
 {
 public:
 	using CompoundEdit::Redo;
 	using CompoundEdit::Undo;
-
-	UndoManager() = default;
 
 	bool CanUndo() const;
 	bool CanRedo() const;
@@ -19,5 +18,5 @@ private:
 	bool DerivedUndo();
 	bool DerivedRedo();
 
-	size_t m_nextEditIndex{};
+	size_t m_nextEditIndex;
 };

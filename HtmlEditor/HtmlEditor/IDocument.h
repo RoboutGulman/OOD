@@ -30,8 +30,10 @@ public:
 	virtual bool CanRedo() const = 0;
 	virtual void Redo() = 0;
 
+	//перенести в editor
 	virtual void Save(const Path& path) const = 0;
-
+	
+	//перенести в editor
 	virtual void Print(std::ostream& output) const = 0;
 
 	virtual ~IDocument() = default;

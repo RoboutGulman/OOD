@@ -20,9 +20,7 @@ ParagraphPtr HTMLDocument::InsertParagraph(const std::string& text, std::optiona
 
 ParagraphPtr HTMLDocument::ReplaceParagraph(const std::string& newText, std::optional<size_t> position)
 {
-	bool isEndInsert = !position.has_value();
-
-	size_t index = isEndInsert
+	size_t index = !position.has_value()
 		? (m_items.size() != 0)
 			? m_items.size() - 1
 			: 0

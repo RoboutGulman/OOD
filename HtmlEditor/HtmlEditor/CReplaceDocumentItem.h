@@ -9,23 +9,23 @@
 class CReplaceDocumentItem : public CompoundEdit
 {
 public:
-	CReplaceDocumentItem(DocumentItemsContainer& target,
+	CReplaceDocumentItem(DocumentItemsContainer& receiver,
 		const CDocumentItem& oldDocItem,
 		const CDocumentItem& newDocItem,
 		size_t index)
 		: CompoundEdit()
-		, m_target(target)
+		, m_receiver(receiver)
 		, m_index(index)
 	{
-		if (index >= target.size())
+		if (index >= receiver.size())
 		{
 			throw std::out_of_range("Failed to replace item in Document. Given index is out of range");
 		}
 
-		auto firstC = std::make_shared<CDeleteDocumentItem>(target,
+		auto firstC = std::make_shared<CDeleteDocumentItem>(receiver,
 			oldDocItem,
 			index);
-		auto secondC = std::make_shared<CInsertDocumentItem>(target,
+		auto secondC = std::make_shared<CInsertDocumentItem>(receiver,
 			newDocItem,
 			index);
 		m_edits.emplace_back(std::move(firstC));
@@ -33,7 +33,7 @@ public:
 	}
 
 private:
-	DocumentItemsContainer& m_target;
+	DocumentItemsContainer& m_receiver;
 
 	size_t m_index;
 };
