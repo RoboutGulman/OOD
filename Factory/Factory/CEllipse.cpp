@@ -6,7 +6,7 @@
 #include "Point.h"
 
 CEllipse::CEllipse(Point&& basePoint, unsigned int verticalR, unsigned int horizontalR, Color color)
-	: CShape(std::forward<Point>(basePoint), color)
+	: CShape(std::move(basePoint), color)
 	, m_verticalR(verticalR)
 	, m_horizontalR(horizontalR)
 {

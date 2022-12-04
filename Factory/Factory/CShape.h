@@ -15,7 +15,7 @@ public:
 
 protected:
 	CShape(Point&& point, Color color)
-		: m_basePoint(std::forward<Point>(point))
+		: m_basePoint(std::move(point))
 		, m_color(color)
 	{
 	}
