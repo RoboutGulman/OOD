@@ -158,12 +158,12 @@
     <ClCompile Include="..\HtmlEditor\AbstractUndoableEdit.cpp" />
     <ClCompile Include="..\HtmlEditor\CDocumentItem.cpp" />
     <ClCompile Include="..\HtmlEditor\CEditor.cpp" />
-    <ClCompile Include="..\HtmlEditor\CEditorRemoteControl.cpp" />
+    <ClCompile Include="..\HtmlEditor\CEditorMenu.cpp" />
     <ClCompile Include="..\HtmlEditor\CompoundEdit.cpp" />
     <ClCompile Include="..\HtmlEditor\CParagraph.cpp" />
+    <ClCompile Include="..\HtmlEditor\HistoryManager.cpp" />
     <ClCompile Include="..\HtmlEditor\HtmlDocument.cpp" />
     <ClCompile Include="..\HtmlEditor\stdafx.cpp" />
-    <ClCompile Include="..\HtmlEditor\UndoManager.cpp" />
     <ClCompile Include="TemplateTest.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -171,18 +171,18 @@
     <ClInclude Include="..\HtmlEditor\CDeleteDocumentItem.h" />
     <ClInclude Include="..\HtmlEditor\CDocumentItem.h" />
     <ClInclude Include="..\HtmlEditor\CEditor.h" />
-    <ClInclude Include="..\HtmlEditor\CEditorRemoteControl.h" />
+    <ClInclude Include="..\HtmlEditor\CEditorMenu.h" />
     <ClInclude Include="..\HtmlEditor\CInsertDocumentItem.h" />
     <ClInclude Include="..\HtmlEditor\CompoundEdit.h" />
     <ClInclude Include="..\HtmlEditor\CParagraph.h" />
     <ClInclude Include="..\HtmlEditor\CReplaceDocumentItem.h" />
     <ClInclude Include="..\HtmlEditor\CSetTitle.h" />
+    <ClInclude Include="..\HtmlEditor\HistoryManager.h" />
     <ClInclude Include="..\HtmlEditor\HtmlDocument.h" />
     <ClInclude Include="..\HtmlEditor\IDocument.h" />
     <ClInclude Include="..\HtmlEditor\IParagraph.h" />
     <ClInclude Include="..\HtmlEditor\IUndoableEdit.h" />
     <ClInclude Include="..\HtmlEditor\stdafx.h" />
-    <ClInclude Include="..\HtmlEditor\UndoManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

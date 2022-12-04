@@ -27,13 +27,13 @@
     <ClCompile Include="CompoundEdit.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="UndoManager.cpp">
+    <ClCompile Include="HistoryManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CDocumentItem.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CEditorRemoteControl.cpp">
+    <ClCompile Include="CEditorMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CEditor.cpp">
@@ -59,7 +59,7 @@
     <ClInclude Include="CompoundEdit.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="UndoManager.h">
+    <ClInclude Include="HistoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="IDocument.h">
@@ -74,7 +74,7 @@
     <ClInclude Include="CEditor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="CEditorRemoteControl.h">
+    <ClInclude Include="CEditorMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HtmlDocument.h">

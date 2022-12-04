@@ -18,13 +18,7 @@
     <ClCompile Include="TemplateTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\HtmlEditor\CEditorRemoteControl.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\HtmlEditor\CDocumentItem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\HtmlEditor\UndoManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\HtmlEditor\AbstractUndoableEdit.cpp">
@@ -45,12 +39,15 @@
     <ClCompile Include="..\HtmlEditor\stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\HtmlEditor\CEditorMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\HtmlEditor\HistoryManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\HtmlEditor\CEditor.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HtmlEditor\CEditorRemoteControl.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\HtmlEditor\CDocumentItem.h">
@@ -63,9 +60,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\HtmlEditor\IUndoableEdit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\HtmlEditor\UndoManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\HtmlEditor\CompoundEdit.h">
@@ -93,6 +87,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\HtmlEditor\IDocument.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HtmlEditor\CEditorMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\HtmlEditor\HistoryManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

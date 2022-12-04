@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 #include "IDocument.h"
-#include "CEditorRemoteControl.h"
+#include "CEditorMenu.h"
 class CEditor
 {
 public:
@@ -24,7 +24,7 @@ private:
 	void SetTitle(std::istream& is);
 
 	DocumentPtr m_document;
-	CEditorRemoteControl m_remoteControl;
+	CEditorMenu m_remoteControl;
 
 	std::ostream& m_output;
 };

@@ -4,7 +4,7 @@
 
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
-#include "../HtmlEditor/CEditorRemoteControl.h"
+#include "../HtmlEditor/CEditorMenu.h"
 #include "../HtmlEditor/CParagraph.h"
 #include "../HtmlEditor/HtmlDocument.h"
 
@@ -49,7 +49,7 @@ SCENARIO("Remote Control")
 	const std::string firstDcsrp = "firstD", secondDscrp = "secondD", thirdD = "thirdD";
 	std::istringstream is{ firstCShortCut + '\n' + secondCShortCut + '\n' + thirdCShortCut + '\n' + exitC + '\n' };
 	std::ostringstream os{};
-	CEditorRemoteControl editorRC{ is, os };
+	CEditorMenu editorRC{ is, os };
 	bool firstExecuted = false, secondExecuted = false, thirdExecuted = false;
 	editorRC.AddItem(firstCShortCut, firstDcsrp, [&firstExecuted](std::istream&) noexcept {
 		firstExecuted = true;
@@ -224,10 +224,9 @@ SCENARIO("Html Document")
 			doc.DeleteItem(1);
 			THEN("the first paragraph remains in its place, the second is shifted")
 			{
-				CHECK(doc.GetItemsCount() == 3);
+				CHECK(doc.GetItemsCount() == 2);
 				CHECK(doc.GetItem(0).GetParagraph() == paragraph1);
 				CHECK(doc.GetItem(1).GetParagraph() == paragraph3);
-				CHECK(doc.GetItem(2).GetParagraph() == paragraph2);
 			}
 		}
 	}

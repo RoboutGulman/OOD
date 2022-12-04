@@ -2,7 +2,7 @@
 #include "CompoundEdit.h"
 
 //HistoryManager|History
-class UndoManager : private CompoundEdit
+class HistoryManager : private CompoundEdit
 {
 public:
 	using CompoundEdit::Redo;

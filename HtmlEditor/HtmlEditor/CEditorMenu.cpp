@@ -1,18 +1,18 @@
 #include "stdafx.h"
-#include "CEditorRemoteControl.h"
+#include "CEditorMenu.h"
 
-CEditorRemoteControl::CEditorRemoteControl(std::istream& input, std::ostream& output)
+CEditorMenu::CEditorMenu(std::istream& input, std::ostream& output)
 	: m_input(input)
 	, m_output(output)
 {
 }
 
-void CEditorRemoteControl::AddItem(const std::string& shortcut, const std::string& description, const Command& command)
+void CEditorMenu::AddItem(const std::string& shortcut, const std::string& description, const Command& command)
 {
 	m_items.emplace_back(shortcut, description, command);
 }
 
-void CEditorRemoteControl::Run()
+void CEditorMenu::Run()
 {
 	ShowInstructions();
 
@@ -24,7 +24,7 @@ void CEditorRemoteControl::Run()
 	}
 }
 
-void CEditorRemoteControl::ShowInstructions()
+void CEditorMenu::ShowInstructions()
 {
 	m_output << "Commands list:\n";
 	for (auto& item : m_items)
@@ -34,12 +34,12 @@ void CEditorRemoteControl::ShowInstructions()
 	m_output << std::endl;
 }
 
-void CEditorRemoteControl::Exit()
+void CEditorMenu::Exit()
 {
 	m_exit = true;
 }
 
-bool CEditorRemoteControl::ExecuteCommand(const std::string& shortcut)
+bool CEditorMenu::ExecuteCommand(const std::string& shortcut)
 {
 	std::istringstream iss(shortcut);
 	std::string name;

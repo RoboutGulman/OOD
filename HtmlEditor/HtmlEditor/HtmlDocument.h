@@ -3,7 +3,7 @@
 
 #include "CDocumentItem.h"
 #include "IDocument.h"
-#include "UndoManager.h"
+#include "HistoryManager.h"
 
 using DocumentItemsContainer = std::vector<CDocumentItem>;
 
@@ -40,5 +40,5 @@ private:
 	std::string m_title = "Title";
 
 	DocumentItemsContainer m_items;
-	UndoManager m_undoManager;
+	HistoryManager m_undoManager;
 };

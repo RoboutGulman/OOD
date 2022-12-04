@@ -1,11 +1,11 @@
 #pragma once
 //переименовать в Menu
-class CEditorRemoteControl
+class CEditorMenu
 {
 public:
 	using Command = std::function<void(std::istream&)>;
 
-	CEditorRemoteControl(std::istream& input, std::ostream& output);
+	CEditorMenu(std::istream& input, std::ostream& output);
 
 	void AddItem(const std::string& shortcut, const std::string& description, const Command& command);
 	void Run();

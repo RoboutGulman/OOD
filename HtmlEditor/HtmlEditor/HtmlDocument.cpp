@@ -101,17 +101,6 @@ void HTMLDocument::Redo()
 	m_undoManager.Redo();
 }
 
-void HTMLDocument::Print(std::ostream& output) const
-{
-	output << "Title: " << GetTitle() << std::endl;
-
-	size_t itemIndex = 1;
-	for (auto item : m_items)
-	{
-		output << itemIndex++ << ". " << item.GetParagraph()->GetText() << std::endl;
-	}
-}
-
 const std::map<char, std::string_view> SPEC_SYMBS_TO_HTML_SYMBS{
 	{ '<', "&lt;" },
 	{ '>', "&gt;" },

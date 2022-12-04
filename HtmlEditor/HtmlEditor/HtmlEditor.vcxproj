@@ -150,19 +150,19 @@
     <ClCompile Include="AbstractUndoableEdit.cpp" />
     <ClCompile Include="CDocumentItem.cpp" />
     <ClCompile Include="CEditor.cpp" />
-    <ClCompile Include="CEditorRemoteControl.cpp" />
+    <ClCompile Include="CEditorMenu.cpp" />
     <ClCompile Include="CompoundEdit.cpp" />
     <ClCompile Include="CParagraph.cpp" />
     <ClCompile Include="HtmlDocument.cpp" />
     <ClCompile Include="stdafx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="UndoManager.cpp" />
+    <ClCompile Include="HistoryManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractUndoableEdit.h" />
     <ClInclude Include="CDeleteDocumentItem.h" />
     <ClInclude Include="CDocumentItem.h" />
-    <ClInclude Include="CEditorRemoteControl.h" />
+    <ClInclude Include="CEditorMenu.h" />
     <ClInclude Include="CInsertDocumentItem.h" />
     <ClInclude Include="CompoundEdit.h" />
     <ClInclude Include="CEditor.h" />
@@ -174,7 +174,7 @@
     <ClInclude Include="IParagraph.h" />
     <ClInclude Include="IUndoableEdit.h" />
     <ClInclude Include="stdafx.h" />
-    <ClInclude Include="UndoManager.h" />
+    <ClInclude Include="HistoryManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

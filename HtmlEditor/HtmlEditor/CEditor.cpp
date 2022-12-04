@@ -154,7 +154,12 @@ void CEditor::InsertParagparh(std::istream& is)
 
 void CEditor::PrintDocument()
 {
-	m_document->Print(m_output);
+	m_output << "Title: " << m_document->GetTitle() << std::endl;
+
+	for (int itemIndex = 0; itemIndex < m_document->GetItemsCount(); itemIndex++)
+	{
+		m_output << itemIndex + 1 << ". " << m_document->GetItem(itemIndex).GetParagraph()->GetText() << std::endl;
+	}
 }
 
 void CEditor::ReplaceText(std::istream& is)
