@@ -1,8 +1,8 @@
 #pragma once
 #include "stdafx.h"
 
-#include "IDocument.h"
 #include "CEditorMenu.h"
+#include "IDocument.h"
 class CEditor
 {
 public:
@@ -11,16 +11,21 @@ public:
 	void Start();
 
 private:
+	using Path = std::filesystem::path;
+
 	void Redo();
 	void Undo();
 
 	void DeleteItem(std::istream& is);
 	void InsertParagparh(std::istream& is);
-	//void InsertImage(std::istream& is);
+	// void InsertImage(std::istream& is);
 	void PrintDocument();
-	//void ResizeImage(std::istream& is);
+	// void ResizeImage(std::istream& is);
 	void ReplaceText(std::istream& is);
+
+	void FormHtmlDocument(std::ostream& output);
 	void Save(std::istream& is);
+
 	void SetTitle(std::istream& is);
 
 	DocumentPtr m_document;

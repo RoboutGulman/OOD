@@ -7,8 +7,6 @@
 class IDocument
 {
 public:
-	using Path = std::filesystem::path;
-
 	virtual ParagraphPtr InsertParagraph(const std::string& text,
 		std::optional<size_t> position = std::nullopt)
 		= 0;
@@ -30,8 +28,7 @@ public:
 	virtual bool CanRedo() const = 0;
 	virtual void Redo() = 0;
 
-	//перенести в editor
-	virtual void Save(const Path& path) const = 0;
+	//перенести в editor функцию Save
 	
 	//перенести в editor функцию print
 	

@@ -15,6 +15,8 @@ bool HistoryManager::CanRedo() const
 void HistoryManager::AddAndExecuteEdit(const IUndoableEditSharedPtr& edit)
 {
 	// переделать
+	edit->Execute();
+
 	if (m_nextEditIndex < m_edits.size())
 	{
 		m_edits.resize(++m_nextEditIndex);
@@ -25,7 +27,6 @@ void HistoryManager::AddAndExecuteEdit(const IUndoableEditSharedPtr& edit)
 		m_edits.emplace_back(edit);
 		++m_nextEditIndex;
 	}
-	edit->Execute();
 }
 
 bool HistoryManager::DerivedExecute()

@@ -14,7 +14,7 @@ void CEditorMenu::AddItem(const std::string& shortcut, const std::string& descri
 
 void CEditorMenu::Run()
 {
-	ShowInstructions();
+	m_output << "Welcome to Editor. Type 'Help' to show availible commands" << std::endl;
 
 	std::string shortcut;
 	while ((m_output << ">")

@@ -4,6 +4,7 @@
 
 #define CATCH_CONFIG_MAIN
 #include "../../../catch/catch.hpp"
+#include "../HtmlEditor/CEditor.h"
 #include "../HtmlEditor/CEditorMenu.h"
 #include "../HtmlEditor/CParagraph.h"
 #include "../HtmlEditor/HtmlDocument.h"
@@ -63,9 +64,10 @@ SCENARIO("Remote Control")
 	editorRC.AddItem(exitC, exitCD, [&editorRC](std::istream&) noexcept {
 		editorRC.Exit();
 	});
-	const std::string expectedOut = std::string("Commands list:\n") + "first: firstD\n" + "second: secondD\n" + "third: thirdD\n" + "exit: Stops\n\n>>>>";
+	const std::string expectedOut = std::string("Welcome to Editor. Type 'Help' to show availible commands\n>>>>Commands list:\n") + "first: firstD\n" + "second: secondD\n" + "third: thirdD\n" + "exit: Stops\n\n";
 
 	editorRC.Run();
+	editorRC.ShowInstructions();
 
 	CHECK(firstExecuted == true);
 	CHECK(secondExecuted == true);
@@ -196,18 +198,7 @@ SCENARIO("Html Document")
 	{
 		REQUIRE_THROWS_AS(doc.ReplaceParagraph("text", 2), std::out_of_range);
 	}
-	WHEN("save document")
-	{
-		doc.InsertParagraph("Some text");
-		IDocument::Path directoryPath = "directory";
 
-		doc.Save(directoryPath);
-		THEN("folder is created")
-		{
-			CHECK(std::filesystem::exists(directoryPath));
-			std::filesystem::remove_all(directoryPath);
-		}
-	}
 	WHEN("have document with 3 paragraphs")
 	{
 		const auto paragraph1Text = "Paragraph 1 text";
@@ -230,4 +221,18 @@ SCENARIO("Html Document")
 			}
 		}
 	}
+}
+
+SCENARIO("editor saves document with one paragraph")
+{
+	std::filesystem::path directoryPath = " directory";
+	std::string input = "InsertParagraph end text\nList\nSave directory\nExit\n ";
+	std::istringstream strmIn(input);
+	std::ostringstream strmOut;
+	auto document = std::make_unique<HTMLDocument>();
+	CEditor editor(std::move(document), strmIn, strmOut);
+	editor.Start();
+	CHECK(strmOut.str() == "Welcome to Editor. Type 'Help' to show availible commands\n>>Title: Title\n1.  text\n>>");
+	CHECK(std::filesystem::exists(directoryPath));
+	std::filesystem::remove_all(directoryPath);
 }

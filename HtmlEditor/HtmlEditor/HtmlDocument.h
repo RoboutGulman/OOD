@@ -33,9 +33,6 @@ public:
 	bool CanRedo() const;
 	void Redo();
 
-	void Save(const Path& path) const;
-
-	void Print(std::ostream& output) const;
 private:
 	std::string m_title = "Title";
 
