@@ -9,13 +9,14 @@
 
 std::string CreateExpectedAdapterOutput(int fromX, int fromY, int toX, int toY)
 {
-	return std::string("<draw>\n") + "<line fromX=\"" + std::to_string(fromX) + "\" fromY=\"" + std::to_string(fromY) + "\" toX=\"" + std::to_string(toX) + "\" toY=\"" + std::to_string(toY) + "\" />\n" + "</draw>\n";
+	return "<line fromX=\"" + std::to_string(fromX) + "\" fromY=\"" + std::to_string(fromY) + "\" toX=\"" + std::to_string(toX) + "\" toY=\"" + std::to_string(toY) + "\" />\n";
 }
+
+const std::string startDrawingMessage = "<draw>\n";
 
 SCENARIO("Adapter")
 {
-
-	std::stringstream ss{};
+	std::stringstream ss;
 	graphics_lib::ICanvasPtr adapter = std::make_unique<app::CModernGraphicsRendererAdapter>(ss);
 
 	WHEN("move to")
@@ -24,18 +25,7 @@ SCENARIO("Adapter")
 
 		THEN("drawing has started")
 		{
-			CHECK(ss.str() == "<draw>\n");
-		}
-	}
-
-	WHEN("move two times")
-	{
-		adapter->MoveTo(0, 10);
-		adapter->MoveTo(3, 5);
-
-		THEN("drawing has started only one time")
-		{
-			CHECK(ss.str() == "<draw>\n");
+			CHECK(ss.str() == startDrawingMessage);
 		}
 	}
 	WHEN("move to and then draw line")
@@ -48,9 +38,28 @@ SCENARIO("Adapter")
 
 		THEN("drawing has started, line is drawn with correct coordinates and drawing is finished")
 		{
-			CHECK(ss.str() == expectedCanvasOutput);
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput);
 		}
 	}
+
+	WHEN("move two times and then draw line")
+	{
+		const modern_graphics_lib ::Point firstMovePoint(0, 10);
+		const modern_graphics_lib ::Point secondMovePoint(3, 5);
+		const modern_graphics_lib ::Point endLinePoint(10, 8);
+
+		const std::string expectedCanvasOutput = CreateExpectedAdapterOutput(secondMovePoint.x, secondMovePoint.y, endLinePoint.x, endLinePoint.y);
+
+		adapter->MoveTo(firstMovePoint.x, firstMovePoint.y);
+		adapter->MoveTo(secondMovePoint.x, secondMovePoint.y);
+		adapter->LineTo(endLinePoint.x, endLinePoint.y);
+
+		THEN("Line was drawn from second move point")
+		{
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput);
+		}
+	}
+
 	WHEN("draw line")
 	{
 		const int fromX = 0, fromY = 0, toX = 100, toY = 100;
@@ -60,7 +69,7 @@ SCENARIO("Adapter")
 
 		THEN("drawing has started, line is drawn from (0,0) with correct coordinates and drawing is finished")
 		{
-			CHECK(ss.str() == expectedCanvasOutput);
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput);
 		}
 	}
 	WHEN("draw line and then move")
@@ -73,7 +82,7 @@ SCENARIO("Adapter")
 
 		THEN("line is drawn from (0,0) with correct coordinates and drawing starts again")
 		{
-			CHECK(ss.str() == expectedCanvasOutput + "<draw>\n");
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput);
 		}
 	}
 	WHEN("draw 2 lines")
@@ -89,7 +98,7 @@ SCENARIO("Adapter")
 
 		THEN("both line is drawn. end of first line is start of second")
 		{
-			CHECK(ss.str() == expectedCanvasOutput1 + expectedCanvasOutput2);
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput1 + expectedCanvasOutput2);
 		}
 	}
 	WHEN("draw line, move and then draw another line")
@@ -107,7 +116,7 @@ SCENARIO("Adapter")
 
 		THEN("both line is drawn. first line drawn from (0,0) second line drawn from move point")
 		{
-			CHECK(ss.str() == expectedCanvasOutput1 + expectedCanvasOutput2);
+			CHECK(ss.str() == startDrawingMessage + expectedCanvasOutput1 + expectedCanvasOutput2);
 		}
 	}
 }
