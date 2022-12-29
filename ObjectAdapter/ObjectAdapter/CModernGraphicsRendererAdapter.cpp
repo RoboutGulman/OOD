@@ -9,7 +9,7 @@ CModernGraphicsRendererAdapter::CModernGraphicsRendererAdapter(Renderer& rendere
 	: m_adaptee(renderer)
 	, m_currentPoint(0, 0)
 {
-	m_adaptee.BeginDraw();
+	// вызывать BeginDraw во внешнем коде
 }
 
 void CModernGraphicsRendererAdapter::MoveTo(int x, int y)
@@ -25,11 +25,6 @@ void CModernGraphicsRendererAdapter::LineTo(int x, int y)
 	m_adaptee.DrawLine(m_currentPoint, modern_graphics_lib::Point(x, y));
 
 	MoveTo(x, y);
-}
-
-CModernGraphicsRendererAdapter::~CModernGraphicsRendererAdapter()
-{
-	m_adaptee.EndDraw();
 }
 
 } // namespace app

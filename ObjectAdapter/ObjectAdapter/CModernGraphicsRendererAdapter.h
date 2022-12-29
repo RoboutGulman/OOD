@@ -16,8 +16,6 @@ public:
 	void MoveTo(int x, int y) override;
 	void LineTo(int x, int y) override;
 
-	~CModernGraphicsRendererAdapter();
-
 private:
 	Renderer& m_adaptee;
 	modern_graphics_lib::Point m_currentPoint;

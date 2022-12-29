@@ -34,7 +34,10 @@ void PaintPictureOnCanvas()
 void PaintPictureOnModernGraphicsRenderer()
 {
 	modern_graphics_lib::CModernGraphicsRenderer renderer(std::cout);
+
+	renderer.BeginDraw();
 	graphics_lib::ICanvasPtr simpleCanvas = std::make_unique<CModernGraphicsRendererAdapter>(renderer);
+
 	shape_drawing_lib::CCanvasPainter painter(std::move(simpleCanvas));
 
 	PaintPicture(painter);

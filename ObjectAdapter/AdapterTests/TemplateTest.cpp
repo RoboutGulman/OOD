@@ -20,17 +20,10 @@ SCENARIO("Adapter")
 {
 	std::stringstream ss{};
 	modern_graphics_lib::CModernGraphicsRenderer renderer{ ss };
+	renderer.BeginDraw();
 	graphics_lib::ICanvasPtr adapter = std::make_unique<app::CModernGraphicsRendererAdapter>(renderer);
 
-	WHEN("move to")
-	{
-		adapter->MoveTo(0, 10);
-
-		THEN("drawing has started")
-		{
-			CHECK(ss.str() == startDrawingMessage);
-		}
-	}
+	// доработать тесты
 	WHEN("move to and then draw line")
 	{
 		const int fromX = 30, fromY = 10, toX = 1000, toY = 10;
