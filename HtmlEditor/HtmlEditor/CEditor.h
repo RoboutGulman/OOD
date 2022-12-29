@@ -24,6 +24,7 @@ private:
 	void ReplaceText(std::istream& is);
 
 	void FormHtmlDocument(std::ostream& output);
+	//создать отдельный объект, который сохраняет данные, editor передаёт данные туда
 	void Save(std::istream& is);
 
 	void SetTitle(std::istream& is);

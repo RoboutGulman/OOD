@@ -7,6 +7,7 @@ public:
 
 	CEditorMenu(std::istream& input, std::ostream& output);
 
+	//переименовать Item в Command
 	void AddItem(const std::string& shortcut, const std::string& description, const Command& command);
 	void Run();
 	void ShowInstructions();

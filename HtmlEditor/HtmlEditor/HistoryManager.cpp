@@ -17,6 +17,8 @@ void HistoryManager::AddAndExecuteEdit(const IUndoableEditSharedPtr& edit)
 	// переделать
 	edit->Execute();
 
+	//сделать без if
+
 	if (m_nextEditIndex < m_edits.size())
 	{
 		m_edits.resize(++m_nextEditIndex);

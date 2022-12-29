@@ -24,6 +24,7 @@ protected:
 	bool DerivedUndo() override;
 	bool DerivedRedo() override;
 
+	//vector גלוסעמ deque
 	std::deque<IUndoableEditSharedPtr> m_edits;
 
 private:
